@@ -8,7 +8,8 @@ Or with a configuration:
 
 # Running a standalone server
 
-1. Change the `data_dir` path in _standalone-server-conf.hcl_ and _standalone-agent-conf.hcl_.
+1. Change the `data_dir` path in 
+   [standalone-server-conf.hcl](standalone-server-conf.hcl) and [standalone-agent-conf.hcl](standalone-agent-conf.hcl).
 
 2. Start the server (a one-node cluster):
 
