@@ -82,21 +82,30 @@ Make sure to change the `data_dir` path in [standalone-server-conf.hcl](standalo
 1. Start RabbitMQ
 
   * Run RabbitMQ: `docker run -d --hostname local-rabbitmq --name rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:3.8-management`
-  * Declare queues and exchanges for Nomad allocations: `./rabbit_setup.sh allocations` (view [rabbit_setup.sh](rabbit_setup.sh)) 
+
+  * Declare queues and exchanges for Nomad allocations: `./rabbit_setup.sh allocations` (view [rabbit_setup.sh](rabbit_setup.sh))
+
   * Open the dashboard [http://localhost:15672/](http://localhost:15672/) (with _guest/guest_ credentials).
-* Start [Consul](https://www.consul.io/): `docker run -d --name consul -p 8500:8500 consul:1.6`
-* Start Firehose to monitor the [_allocations_](http://localhost:4646/v1/allocations) endpoint: `./firehose.sh allocations` (view [firehose.sh](firehose.sh)). It acquires a Consul lock.
-* Start another Firehose instance to monitor the same endpoint: `./firehose.sh allocations`. It will block trying to acquire a Consul lock.
-* Send dispatches: `for i in {1..100}; do nomad job dispatch sleep; sleep 3; done`
-* See the messages being accumulated in the [allocations queue](http://localhost:15672/#/queues/%2F/nomad-allocations).
-* See two [connections](http://localhost:15672/#/connections) in RabbitMQ that correspond to the two Firehose instances.
-* Close the instance of Firehose that is holding the Consul lock. See one connection go away, the other Firehose taking the lock and starting to publish messages.
+
+2. Start [Consul](https://www.consul.io/): `docker run -d --name consul -p 8500:8500 consul:1.6`
+
+3. Start Firehose to monitor the [_allocations_](http://localhost:4646/v1/allocations) endpoint: `./firehose.sh allocations` (view [firehose.sh](firehose.sh)). It acquires a Consul lock.
+
+4. Let's see how Firehose fail-over works. Start another Firehose instance to monitor the same endpoint: `./firehose.sh allocations`. It will block trying to acquire a Consul lock.
+
+5. Send dispatches: `for i in {1..100}; do nomad job dispatch sleep; sleep 3; done`
+
+6. See the messages being accumulated in the [allocations queue](http://localhost:15672/#/queues/%2F/nomad-allocations).
+
+7. See two [connections](http://localhost:15672/#/connections) in RabbitMQ that correspond to the two Firehose instances.
+
+8. Close the instance of Firehose that is holding the Consul lock. See one connection go away, the other Firehose taking the lock and starting to publish messages.
 
 # Build Nomad Locally
 
 For this section you need Go language tools and _GNU make_ installed, and GOPATH environment variable defined.
 
-1. Go requires sources to reside under \$GOPATH/src. Clone the [Nomad repository](https://github.com/hashicorp/nomad) into _\$GOPATH/src/github.com/hashicorp_.
+1. Go requires all sources to reside under \$GOPATH/src. Clone the [Nomad repository](https://github.com/hashicorp/nomad) into _\$GOPATH/src/github.com/hashicorp_ (`mkdir -p $GOPATH/src/github.com/hashicorp; cd $GOPATH/src/github.com/hashicorp; clone git@github.com:hashicorp/nomad.git`).
 
 2. I like all my projects to sit under a development folder. Let's say _~/dev_. Therefore, I created a symbolic link to the clone of Nomad in that directory: `ln -s $GOPATH/src/github.com/hashicorp/nomad ~/dev/nomad`.
 
