@@ -27,11 +27,6 @@ job "sleep-2min" {
       env {
         TIME = "120"
       }
-
-      resources {
-        cpu    = 500 # 500 MHz
-        memory = 64 # 256MB
-      }
     }
   }
 }
