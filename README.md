@@ -105,7 +105,7 @@ Make sure to change the `data_dir` path in [standalone-server-conf.hcl](standalo
 
 For this section you need Go language tools and _GNU make_ installed, and GOPATH environment variable defined.
 
-1. Go requires all sources to reside under \$GOPATH/src. Clone the [Nomad repository](https://github.com/hashicorp/nomad) into _\$GOPATH/src/github.com/hashicorp_ (`mkdir -p $GOPATH/src/github.com/hashicorp; cd $GOPATH/src/github.com/hashicorp; clone git@github.com:hashicorp/nomad.git`).
+1. Go requires all sources to reside under \$GOPATH/src. Clone the [Nomad repository](https://github.com/hashicorp/nomad) into _\$GOPATH/src/github.com/hashicorp_ (`mkdir -p $GOPATH/src/github.com/hashicorp; cd $GOPATH/src/github.com/hashicorp; clone git@github.com:hashicorp/nomad.git --depth 1 --single-branch`).
 
 2. I like all my projects to sit under a development folder. Let's say _~/dev_. Therefore, I created a symbolic link to the clone of Nomad in that directory: `ln -s $GOPATH/src/github.com/hashicorp/nomad ~/dev/nomad`.
 
