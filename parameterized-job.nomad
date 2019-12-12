@@ -34,11 +34,6 @@ job "sleep" {
       env {
         TIME = "${NOMAD_META_TIME}"
       }
-
-      resources {
-        cpu    = 500 # 500 MHz
-        memory = 64 # 256MB
-      }
     }
   }
 }

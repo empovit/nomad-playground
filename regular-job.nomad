@@ -14,10 +14,6 @@ job "sleep-2min" {
       mode = "fail"
     }
 
-    ephemeral_disk {
-      size = 300
-    }
-
     task "sleep-task" {
       driver = "docker"
       config {

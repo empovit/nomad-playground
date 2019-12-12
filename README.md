@@ -79,7 +79,7 @@ Make sure to change the `data_dir` path in [standalone-server-conf.hcl](standalo
 
 # Connect Firehose 
 
-1. Start RabbitMQ
+1. Start RabbitMQ from a Docker [image](https://hub.docker.com/_/rabbitmq):
 
   * Run RabbitMQ: `docker run -d --hostname local-rabbitmq --name rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:3.8-management`
 
@@ -87,7 +87,7 @@ Make sure to change the `data_dir` path in [standalone-server-conf.hcl](standalo
 
   * Open the dashboard [http://localhost:15672/](http://localhost:15672/) (with _guest/guest_ credentials).
 
-2. Start [Consul](https://www.consul.io/): `docker run -d --name consul -p 8500:8500 consul:1.6`
+2. Start [Consul](https://www.consul.io/) from a Docker [image](https://hub.docker.com/_/consul): `docker run -d --name consul -p 8500:8500 consul:1.6`
 
 3. Start Firehose to monitor the [_allocations_](http://localhost:4646/v1/allocations) endpoint: `./firehose.sh allocations` (view [firehose.sh](firehose.sh)). It acquires a Consul lock.
 
