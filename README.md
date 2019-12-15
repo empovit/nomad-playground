@@ -113,7 +113,7 @@ For this section you need Go language tools and _GNU make_ installed, and GOPATH
 
 4. Run `make bootstrap`. Some errors related to missing files or directories are OK.
 
-5. Run `make dev` to build a development version of Nomad.
+5. Run `make dev` or `make dev-ui` (includes the UI) to build a development version of Nomad.
 
 6. Now start the locally built version of Nomad using `./bin/nomad` (instead of `nomad`).
 
