@@ -1,4 +1,5 @@
-data_dir = "/Users/<user>/nomad-data/client"
+data_dir = "/tmp/nomad-client"
+disable_update_check = true
 
 client {
   enabled = true

@@ -8,7 +8,7 @@
 # Usage: ./firehose.sh <endpoint>
 # Example: ./firehose.sh allocations
 
-export NOMAD_ADDR=http://localhost:4646
+export NOMAD_ADDR=http://127.0.0.1:4646
 export SINK_TYPE=amqp
 export SINK_AMQP_CONNECTION=amqp://guest:guest@127.0.0.1:5672/
 export SINK_AMQP_WORKERS=1 # what’s this?

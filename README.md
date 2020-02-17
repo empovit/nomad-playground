@@ -14,7 +14,7 @@ This demonstrates running [Hashicorp Nomad](https://www.nomadproject.io/) in a c
 
 Make sure to change the `data_dir` path in [standalone-server-conf.hcl](standalone-server-conf.hcl) and [standalone-client-conf.hcl](standalone-client-conf.hcl).
 
-**NOTE**: If you encounter problems starting the server on subsequent runs, and are OK with _losing any persistent data_ of the test Nomad cluster, delete the data directory. 
+**NOTE**: If you encounter problems starting the server on subsequent runs, and are OK with _losing any persistent data_ of the test Nomad cluster, delete the data directory (`rm -rf /tmp/nomad-server/*`).
 
 # Start Nomad
 
@@ -24,13 +24,13 @@ Make sure to change the `data_dir` path in [standalone-server-conf.hcl](standalo
 
 # Run a Job
 
-* We have a simple `sleep` command with the time given as a parameter, packaged as a Docker image (see [entrypoint.sh](docker/entrypoint.sh)). To build the image, run `cd docker; docker build -t sleep-job:1 .`
+* We have a simple `sleep` command with the time given as a parameter, packaged as a Docker image (see [entrypoint.sh](docker/entrypoint.sh)). To build the image, run `docker build -t sleep-job:1 docker`
 
-* Run a regular job defined in [regular-job.nomad](regular-job.nomad). It sleeps 2 min:  `nomad run regular-job.nomad`
+* Run a regular job defined in [regular-job.hcl](regular-job.hcl). It sleeps 2 min:  `nomad run regular-job.hcl`
 
-* Load the parametrized job defined in [parameterized-job.nomad](parameterized-job.nomad): `nomad run parameterized-job.nomad`
+* Load the parametrized job defined in [param-job.hcl](param-job.hcl): `nomad run param-job.hcl`
 
-* Create a dispatch with either the default sleep time of 60 sec: `nomad job dispatch sleep`, or a custom sleep time (6 min in this case): `nomad job dispatch -meta TIME=360 sleep`
+* Create a dispatch with either the default sleep time of 60 sec: `nomad job dispatch sleep`, or a custom sleep time (6 min in this case): `nomad job dispatch -meta TIME=120 sleep`
 
 # Try Some Commands
 
