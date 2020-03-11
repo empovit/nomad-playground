@@ -121,7 +121,10 @@ For this section you need Go language tools and _GNU make_ installed, and GOPATH
 
 8. Build and run `make dev; ./bin/nomad agent --dev`.
 
+----
 Keep in mind that Nomad uses [govendor](https://github.com/kardianos/govendor) for managing dependencies. Do not use `go get` directly to install packages.
+
+----
 
 # Reference Documentation
 
